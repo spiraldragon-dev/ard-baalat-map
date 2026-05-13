@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-13T16:11:48",
+  "generated_at": "2026-05-13T17:15:37",
   "build_version": "1.0.00",
   "locations": [
     {
@@ -149,6 +149,123 @@
       "public_description": "Modern Lebanese town in Baabda district (Mount Lebanon); Phoenician origin from Hammon, a pre-monotheistic solar deity associated with stone pillars.",
       "wikilinks": [
         "Covenant of El"
+      ]
+    },
+    {
+      "id": "berytus",
+      "title": "Berytus",
+      "category": "phoenician_city",
+      "lat": 33.8938,
+      "lng": 35.5018,
+      "modern_name": "Beirut",
+      "arabic_name": "بيروت",
+      "ancient_name": "Berytus / Be'rot",
+      "origin": "Phoenician / Hebrew",
+      "meaning": "The Wells",
+      "historical_evidence": "strong",
+      "public_description": "Phoenician coastal city; ancient name from the root for \"wells.\" Roman-era Berytus housed one of the most prestigious law schools of the ancient Mediterranean. Modern Beirut is the present-day capital of Lebanon and the implicit setting for Ard Ba'alat's contemporary timeline.",
+      "wikilinks": [
+        "Canaan-Sur",
+        "Covenant of El",
+        "Nai",
+        "Tarek",
+        "Mona"
+      ]
+    },
+    {
+      "id": "byblos",
+      "title": "Byblos",
+      "category": "phoenician_city",
+      "lat": 34.1208,
+      "lng": 35.6483,
+      "modern_name": "Byblos / Jbeil",
+      "arabic_name": "جبيل",
+      "ancient_name": "Gebal / Gubla",
+      "origin": "Phoenician",
+      "meaning": "Source of the God",
+      "suppressed_deity": [
+        "Baalat Gebal",
+        "Adonis",
+        "Astarte"
+      ],
+      "historical_evidence": "strong",
+      "public_description": "One of the oldest continuously inhabited cities in the world. Major Phoenician port and the historical center of the Baalat Gebal (Lady of Byblos) and Adonis cults. The Greek name \"Byblos\" gave rise to the word for book (papyrus was traded through here).",
+      "wikilinks": [
+        "Baalat Gebal",
+        "Adonis",
+        "Sultana",
+        "Covenant of El",
+        "Astarte"
+      ]
+    },
+    {
+      "id": "sidon",
+      "title": "Sidon",
+      "category": "phoenician_city",
+      "lat": 33.5571,
+      "lng": 35.3712,
+      "modern_name": "Sidon / Saida",
+      "arabic_name": "صيدا",
+      "ancient_name": "Sidon / Tzidon",
+      "origin": "Phoenician",
+      "meaning": "Fishing town",
+      "suppressed_deity": [
+        "Eshmun",
+        "Astarte"
+      ],
+      "historical_evidence": "strong",
+      "public_description": "One of the oldest and most important Phoenician city-states. Major center of glass-making and dye production. Anchor of the Eshmun cult, whose temple complex sits just north of the city.",
+      "wikilinks": [
+        "Eshmun",
+        "Covenant of El",
+        "Astarte",
+        "Bechamoun",
+        "glass beads"
+      ]
+    },
+    {
+      "id": "tripoli",
+      "title": "Tripoli",
+      "category": "phoenician_city",
+      "lat": 34.4361,
+      "lng": 35.8497,
+      "modern_name": "Tripoli / Trablous",
+      "arabic_name": "طرابلس",
+      "ancient_name": "Athar / Tripolis",
+      "origin": "Phoenician (original) then Greek (current name)",
+      "meaning": "Three Cities (Greek renaming of the original Phoenician name Athar)",
+      "historical_evidence": "strong",
+      "public_description": "Northern Phoenician coastal city. Originally called Athar; the current name \"Tripoli\" (three cities) is a Greek renaming reflecting the federation of three separate quarters founded by colonists from Tyre, Sidon, and Aradus.",
+      "wikilinks": [
+        "Canaan-Sur",
+        "Covenant of El",
+        "Aradus",
+        "Sultana"
+      ]
+    },
+    {
+      "id": "tyre",
+      "title": "Tyre",
+      "category": "phoenician_city",
+      "lat": 33.2704,
+      "lng": 35.1956,
+      "modern_name": "Tyre",
+      "arabic_name": "صور",
+      "ancient_name": "Tyre / Sur",
+      "origin": "Phoenician",
+      "meaning": "Rock",
+      "suppressed_deity": [
+        "Melqart",
+        "Astarte"
+      ],
+      "historical_evidence": "strong",
+      "public_description": "One of the most ancient and powerful Phoenician city-states. Famous for the Tyrian purple dye industry and as the founding city of Carthage. Major Mediterranean trade hub from the second millennium BCE onward.",
+      "wikilinks": [
+        "Melqart",
+        "Covenant of El",
+        "Lords of the Shell",
+        "Tyrian purple",
+        "Canaan-Sur"
       ]
     }
   ]

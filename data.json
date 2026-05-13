@@ -1,0 +1,155 @@
+{
+  "generated_at": "2026-05-13T16:11:48",
+  "build_version": "1.0.00",
+  "locations": [
+    {
+      "id": "baakline",
+      "title": "Baakline",
+      "category": "toponym",
+      "lat": 33.6833,
+      "lng": 35.55,
+      "modern_name": "Baakline",
+      "arabic_name": "بعقلين",
+      "ancient_name": "Beit Aakline",
+      "origin": "Syriac",
+      "meaning": "place of knots and turns",
+      "historical_evidence": "strong",
+      "public_description": "Modern Lebanese town in Chouf district (Mount Lebanon); Syriac origin meaning place of knots and turns.",
+      "wikilinks": [
+        "Noolat",
+        "Al-Nassajat",
+        "Knot",
+        "Wanderers",
+        "Mona"
+      ]
+    },
+    {
+      "id": "bechamoun",
+      "title": "Bechamoun",
+      "category": "toponym",
+      "lat": 33.7944,
+      "lng": 35.5006,
+      "modern_name": "Bechamoun",
+      "arabic_name": "بشامون",
+      "ancient_name": "Bet Eshmun",
+      "origin": "Syriac Aramaic",
+      "meaning": "Temple of Eshmun",
+      "suppressed_deity": [
+        "Eshmun"
+      ],
+      "historical_evidence": "strong",
+      "public_description": "Modern Lebanese town in Aley district (Mount Lebanon); Aramaic origin meaning Temple of Eshmun. Direct survival of the Phoenician Eshmun cult name in the modern landscape.",
+      "wikilinks": [
+        "Eshmun",
+        "Covenant of El"
+      ]
+    },
+    {
+      "id": "brummana",
+      "title": "Brummana",
+      "category": "toponym",
+      "lat": 33.88,
+      "lng": 35.64,
+      "modern_name": "Brummana",
+      "arabic_name": "برمانا",
+      "ancient_name": "Beit Rammana",
+      "origin": "Aramaic",
+      "meaning": "House of Rammana, god of air, storm, thunder",
+      "suppressed_deity": [
+        "Rammana"
+      ],
+      "historical_evidence": "probable",
+      "public_description": "Modern Lebanese town in Matn district (Mount Lebanon); Aramaic origin meaning House of Rammana, a god of air, storm, and thunder.",
+      "wikilinks": [
+        "Baal Hadad",
+        "Covenant of El"
+      ]
+    },
+    {
+      "id": "bsharre",
+      "title": "Bsharre",
+      "category": "toponym",
+      "lat": 34.2509,
+      "lng": 36.0123,
+      "modern_name": "Bsharre",
+      "arabic_name": "بشري",
+      "ancient_name": "Bet Ishtar",
+      "origin": "Phoenician",
+      "meaning": "house of Ishtar",
+      "suppressed_deity": [
+        "Ishtar",
+        "Inanna"
+      ],
+      "historical_evidence": "strong",
+      "public_description": "Modern Lebanese town in Mount Lebanon (Bsharre district); Phoenician origin Bet Ishtar meaning house of Ishtar. The strongest single survival of Ishtar / Inanna's name in the modern Lebanese landscape.",
+      "wikilinks": [
+        "Ishtar",
+        "Inanna",
+        "Noolat",
+        "Al-Nassajat"
+      ]
+    },
+    {
+      "id": "dar-baachtar",
+      "title": "Dar Baachtar",
+      "category": "toponym",
+      "lat": 34.1828,
+      "lng": 35.9156,
+      "modern_name": "Dar Baachtar",
+      "arabic_name": "دار بعشتار",
+      "ancient_name": "Dar Baachtar",
+      "origin": "Phoenician",
+      "meaning": "home of worship of Astarte",
+      "suppressed_deity": [
+        "Astarte",
+        "Ashtarout",
+        "Ishtar"
+      ],
+      "historical_evidence": "strong",
+      "public_description": "Modern Lebanese town in Koura district (North Lebanon); Phoenician origin meaning home of worship of Astarte. Direct survival of Astarte's name in the modern landscape.",
+      "wikilinks": [
+        "Astarte",
+        "Nai",
+        "Noolat",
+        "Al-Nassajat"
+      ]
+    },
+    {
+      "id": "ehden",
+      "title": "Ehden",
+      "category": "toponym",
+      "lat": 34.3,
+      "lng": 35.9667,
+      "modern_name": "Ehden",
+      "arabic_name": "إهدن",
+      "ancient_name": "Eden",
+      "origin": "Phoenician",
+      "meaning": "paradise / garden",
+      "historical_evidence": "probable",
+      "public_description": "Modern Lebanese town in Zgharta district (North Lebanon); Phoenician origin for the word Eden, meaning paradise or garden.",
+      "wikilinks": [
+        "Covenant of El"
+      ]
+    },
+    {
+      "id": "hammana",
+      "title": "Hammana",
+      "category": "toponym",
+      "lat": 33.8331,
+      "lng": 35.7444,
+      "modern_name": "Hammana",
+      "arabic_name": "حمانا",
+      "ancient_name": "Hammon",
+      "origin": "Phoenician",
+      "meaning": "stone pillar to worship the sun",
+      "suppressed_deity": [
+        "Hammon"
+      ],
+      "historical_evidence": "probable",
+      "public_description": "Modern Lebanese town in Baabda district (Mount Lebanon); Phoenician origin from Hammon, a pre-monotheistic solar deity associated with stone pillars.",
+      "wikilinks": [
+        "Covenant of El"
+      ]
+    }
+  ]
+}

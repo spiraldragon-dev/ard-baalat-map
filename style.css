@@ -1,0 +1,76 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+#map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+#info-panel {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 16px;
+  max-width: 320px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+#info-panel h1 {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+#info-panel .tagline {
+  font-size: 13px;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+#info-panel .attribution {
+  font-size: 11px;
+  color: #666;
+}
+
+.popup-card h3 {
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+.popup-card .names {
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.popup-card .names .ancient {
+  font-style: italic;
+  color: #7c4dff;
+}
+
+.popup-card .etymology {
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.popup-card .evidence {
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.popup-card .description {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.leaflet-control-layers {
+  background: rgba(255, 255, 255, 0.95) !important;
+}

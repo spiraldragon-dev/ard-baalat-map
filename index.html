@@ -5,16 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ard Ba'alat: Toponym Survivals on the Lebanese Landscape</title>
   <link rel="stylesheet" href="leaflet/leaflet.css">
+  <link rel="stylesheet" href="leaflet/MarkerCluster.css">
+  <link rel="stylesheet" href="leaflet/MarkerCluster.Default.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div id="map"></div>
+  <aside id="sidebar">
+    <div id="search-wrap">
+      <input type="text" id="search-input" placeholder="Search locations…" autocomplete="off">
+      <button id="search-clear" type="button" aria-label="Clear search">&times;</button>
+    </div>
+    <div id="sidebar-list"></div>
+  </aside>
   <div id="info-panel">
     <h1>Ard Ba'alat</h1>
     <p class="tagline">Toponym survivals on the Lebanese landscape.</p>
+    <button id="popup-toggle" type="button">Detail: Detailed</button>
     <p class="attribution">Worldbuilding by Samer Beyhum. Map data &copy; OpenTopoMap, OpenStreetMap contributors.</p>
   </div>
   <script src="leaflet/leaflet.js"></script>
+  <script src="leaflet/leaflet.markercluster.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

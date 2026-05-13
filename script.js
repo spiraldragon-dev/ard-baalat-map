@@ -3,10 +3,34 @@
 
 const map = L.map('map').setView([33.85, 35.85], 9);
 
-L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-  attribution: 'Map data: &copy; OpenStreetMap contributors, SRTM | Map style: &copy; OpenTopoMap (CC-BY-SA)',
-  maxZoom: 17
-}).addTo(map);
+const baseMaps = {
+  'Topographic': L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data: &copy; OpenStreetMap contributors, SRTM | Map style: &copy; OpenTopoMap (CC-BY-SA)',
+    maxZoom: 17
+  }),
+  'Street': L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 19
+  }),
+  'Satellite': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community',
+    maxZoom: 19
+  }),
+  'Terrain': L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_terrain/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://stamen.com/">Stamen Design</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 18
+  }),
+  'Clean': L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    maxZoom: 20,
+    subdomains: 'abcd'
+  })
+};
+
+baseMaps['Topographic'].addTo(map);
+
+let popupMode = 'detailed';
+const allMarkers = [];
 
 const CATEGORY_STYLES = {
   toponym:              { color: '#7c4dff', label: 'Lebanese Toponyms',            defaultOn: true  },
@@ -30,6 +54,20 @@ function escapeHtml(value) {
 function buildPopupHTML(loc) {
   let html = '<div class="popup-card">';
   html += `<h3>${escapeHtml(loc.title)}</h3>`;
+
+  if (popupMode === 'minimal') {
+    const ancient = loc.ancient_name ? escapeHtml(loc.ancient_name) : '';
+    const meaning = loc.meaning ? escapeHtml(loc.meaning) : '';
+    if (ancient && meaning) {
+      html += `<p class="etymology"><span class="ancient">${ancient}</span> : ${meaning}</p>`;
+    } else if (ancient) {
+      html += `<p class="etymology"><span class="ancient">${ancient}</span></p>`;
+    } else if (meaning) {
+      html += `<p class="etymology">${meaning}</p>`;
+    }
+    html += '</div>';
+    return html;
+  }
 
   if (loc.modern_name || loc.arabic_name || loc.ancient_name) {
     const parts = [];
@@ -66,7 +104,12 @@ fetch('data.json')
   .then(data => {
     const layerGroups = {};
     Object.keys(CATEGORY_STYLES).forEach(cat => {
-      layerGroups[cat] = L.layerGroup();
+      layerGroups[cat] = L.markerClusterGroup({
+        maxClusterRadius: 50,
+        spiderfyOnMaxZoom: true,
+        showCoverageOnHover: false,
+        disableClusteringAtZoom: 11
+      });
     });
 
     data.locations.forEach(loc => {
@@ -81,6 +124,7 @@ fetch('data.json')
         fillOpacity: 0.85
       });
       marker.bindPopup(buildPopupHTML(loc));
+      allMarkers.push({ marker, loc });
       layerGroups[loc.category].addLayer(marker);
     });
 
@@ -92,7 +136,166 @@ fetch('data.json')
     Object.entries(layerGroups).forEach(([cat, group]) => {
       overlayDict[CATEGORY_STYLES[cat].label] = group;
     });
-    L.control.layers(null, overlayDict, { collapsed: false }).addTo(map);
+    L.control.layers(baseMaps, overlayDict, { collapsed: false }).addTo(map);
+
+    const popupToggle = document.getElementById('popup-toggle');
+    if (popupToggle) {
+      popupToggle.addEventListener('click', () => {
+        popupMode = popupMode === 'detailed' ? 'minimal' : 'detailed';
+        popupToggle.textContent = popupMode === 'detailed' ? 'Detail: Detailed' : 'Detail: Minimal';
+        allMarkers.forEach(({ marker, loc }) => {
+          marker.setPopupContent(buildPopupHTML(loc));
+        });
+      });
+    }
+
+    const markerById = new Map();
+    allMarkers.forEach(({ marker, loc }) => markerById.set(loc.id, marker));
+
+    const grouped = {};
+    Object.keys(CATEGORY_STYLES).forEach(cat => { grouped[cat] = []; });
+    data.locations.forEach(loc => {
+      if (grouped[loc.category]) grouped[loc.category].push(loc);
+    });
+    Object.values(grouped).forEach(arr => {
+      arr.sort((a, b) => a.title.localeCompare(b.title));
+    });
+
+    const liById = new Map();
+    const sectionByCat = new Map();
+    const sidebarList = document.getElementById('sidebar-list');
+    if (sidebarList) {
+      Object.entries(CATEGORY_STYLES).forEach(([cat, style]) => {
+        if (grouped[cat].length === 0) return;
+        const section = document.createElement('div');
+        section.className = 'sidebar-section';
+        section.dataset.category = cat;
+
+        const h2 = document.createElement('h2');
+        h2.textContent = style.label;
+        section.appendChild(h2);
+
+        const ul = document.createElement('ul');
+        grouped[cat].forEach(loc => {
+          const li = document.createElement('li');
+          li.className = 'sidebar-item';
+          li.dataset.id = loc.id;
+
+          const titleEl = document.createElement('div');
+          titleEl.className = 'item-title';
+          titleEl.textContent = loc.title;
+          li.appendChild(titleEl);
+
+          const subEl = document.createElement('div');
+          subEl.className = 'item-subtitle';
+          const subParts = [];
+          if (loc.modern_name) {
+            subParts.push(`<span>${escapeHtml(loc.modern_name)}</span>`);
+          }
+          if (loc.ancient_name) {
+            subParts.push(`<span class="ancient">${escapeHtml(loc.ancient_name)}</span>`);
+          }
+          subEl.innerHTML = subParts.join(' &middot; ');
+          li.appendChild(subEl);
+
+          const marker = markerById.get(loc.id);
+          li.addEventListener('click', () => {
+            document.querySelectorAll('.sidebar-item.active').forEach(el => el.classList.remove('active'));
+            li.classList.add('active');
+            map.flyTo([loc.lat, loc.lng], 13, { duration: 0.8 });
+            if (marker) {
+              map.once('moveend', () => marker.openPopup());
+            }
+          });
+
+          ul.appendChild(li);
+          liById.set(loc.id, li);
+        });
+        section.appendChild(ul);
+        sidebarList.appendChild(section);
+        sectionByCat.set(cat, section);
+      });
+    }
+
+    const SEARCH_FIELDS = ['title', 'modern_name', 'arabic_name', 'ancient_name', 'origin', 'meaning'];
+
+    function locMatchesSearch(loc, q) {
+      if (!q) return true;
+      for (const f of SEARCH_FIELDS) {
+        const v = loc[f];
+        if (v && String(v).toLowerCase().includes(q)) return true;
+      }
+      if (Array.isArray(loc.wikilinks)) {
+        for (const w of loc.wikilinks) {
+          if (w && String(w).toLowerCase().includes(q)) return true;
+        }
+      }
+      return false;
+    }
+
+    const categoryEnabled = {};
+    Object.entries(CATEGORY_STYLES).forEach(([cat, style]) => {
+      categoryEnabled[cat] = !!style.defaultOn;
+    });
+
+    let currentSearch = '';
+
+    function applyFilters() {
+      const q = currentSearch;
+      allMarkers.forEach(({ marker, loc }) => {
+        const matches = locMatchesSearch(loc, q);
+        const group = layerGroups[loc.category];
+        if (group) {
+          if (matches && !group.hasLayer(marker)) group.addLayer(marker);
+          else if (!matches && group.hasLayer(marker)) group.removeLayer(marker);
+        }
+        const li = liById.get(loc.id);
+        if (li) {
+          const visible = categoryEnabled[loc.category] && matches;
+          li.classList.toggle('hidden', !visible);
+        }
+      });
+      sectionByCat.forEach(section => {
+        const anyVisible = section.querySelector('.sidebar-item:not(.hidden)');
+        section.classList.toggle('hidden', !anyVisible);
+      });
+    }
+
+    const labelToCat = {};
+    Object.entries(CATEGORY_STYLES).forEach(([cat, style]) => {
+      labelToCat[style.label] = cat;
+    });
+    map.on('overlayadd overlayremove', e => {
+      const cat = labelToCat[e.name];
+      if (!cat) return;
+      categoryEnabled[cat] = e.type === 'overlayadd';
+      applyFilters();
+    });
+
+    const searchInput = document.getElementById('search-input');
+    const searchClear = document.getElementById('search-clear');
+    const searchWrap = document.getElementById('search-wrap');
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        currentSearch = searchInput.value.trim().toLowerCase();
+        if (searchWrap) {
+          searchWrap.classList.toggle('has-content', searchInput.value.length > 0);
+        }
+        applyFilters();
+      });
+    }
+    if (searchClear) {
+      searchClear.addEventListener('click', () => {
+        if (!searchInput) return;
+        searchInput.value = '';
+        currentSearch = '';
+        if (searchWrap) searchWrap.classList.remove('has-content');
+        applyFilters();
+        searchInput.focus();
+      });
+    }
+
+    applyFilters();
   })
   .catch(err => {
     console.error('Failed to load data.json:', err);

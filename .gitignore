@@ -1,0 +1,19 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Local environment files
+.env
+.env.local
+
+# Future Node tooling (unlikely but cheap to ignore)
+node_modules/

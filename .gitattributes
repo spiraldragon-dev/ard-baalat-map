@@ -1,0 +1,3 @@
+# Store text as LF in git so Windows git and WSL git agree on what changed.
+# Infrastructure file added by Foundry 2026-10-07, approved by Samer (SWC Git operations exception).
+* text=auto eol=lf
